@@ -1,0 +1,63 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.stopwatch-time {
+  text-align: center;
+  /* color: #fff; */
+  font-size: 80px;
+}
+
+.stopwatch-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.stopwatch-buttons button {
+  margin: 20px;
+  border: none;
+  padding: 10px 30px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.stopwatch-buttons button:first-child {
+  background-color: green;
+}
+
+.stopwatch-buttons button:last-child {
+  background-color: red;
+}
+
+.hint-li {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+  /* color: #9c9c9c; */
+  line-height: 1.4;
+  font-size: 14px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.hint-number {
+  font-weight: 600;
+}
+
+.game-grid {
+  border: 2px solid black;
+  display: flex;
+  flex-grow: 1;
+  /* width: 25rem;
+  height: 25rem; */
+  width: 25.25rem;
+  height: 25.25rem;
+}
+
+.game-grid input {
+  border: 1px solid black;
+  width: 5rem;
+  height: 5rem;
+}
