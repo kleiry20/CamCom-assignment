@@ -29,7 +29,7 @@ export const GameView = () => {
       <section className="w-1/2  flex flex-col items-end p-4 gap-2">
         <div
           className="p-4"
-          style={{ backgroundColor: "#DCEFFF", width: "25.25rem" }}
+          style={{ backgroundColor: "#DCEFFF", width: "30.25rem" }}
         >
           <p className="font-semibold">
             {selectedQuestion?.quesNumber +
@@ -39,7 +39,10 @@ export const GameView = () => {
             </span>
           </p>
         </div>
-        <GameGrid cellsToHighlight={selectedQuestion?.cells} />
+        <GameGrid
+          cellsToHighlight={selectedQuestion?.cells}
+          setSelectedQuestion={setSelectedQuestion}
+        />
       </section>
       <section className="flex flex-grow ">
         <div className="flex-grow flex gap-6 p-2">

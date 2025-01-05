@@ -52,12 +52,16 @@ body {
   flex-grow: 1;
   /* width: 25rem;
   height: 25rem; */
-  width: 25.25rem;
-  height: 25.25rem;
+  /* width: 25.25rem;
+  height: 25.25rem; */
+  width: 30.25rem;
+  height: 30.25rem;
 }
 
 .game-grid input {
   border: 1px solid black;
-  width: 5rem;
-  height: 5rem;
+  /* width: 5rem;
+  height: 5rem; */
+  width: 6rem;
+  height: 6rem;
 }

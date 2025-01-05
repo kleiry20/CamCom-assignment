@@ -2,61 +2,71 @@ import React, { useState, useEffect } from "react";
 import { gridData } from "../data/gridData";
 
 export const GameGrid = (props) => {
-  const { cellsToHighlight } = props;
+  const { cellsToHighlight, setSelectedQuestion } = props;
 
-  console.log("cellsToHighlight", cellsToHighlight);
-
+  const [gridInput, setGridInput] = useState(gridData);
   const [activeCell, setActiveCell] = useState("");
 
   useEffect(() => {
     setActiveCell(cellsToHighlight[0]);
   }, [cellsToHighlight]);
 
-  // const inactiveCells = [...cellsToHighlight];
-  // inactiveCells.shift();
-
-  const [gridInput, setGridInput] = useState(gridData);
-
   function handleClick(item) {
     setActiveCell(item.id);
+    // setSelectedQuestion(item);
   }
 
-  function handleChange(e) {
-    // setGridInput()
-  }
+  const handleChange = (id, event) => {
+    const updatedItems = gridInput.map((item) => {
+      if (item.id === id) {
+        return {
+          ...item,
+          [event.target.name]: event.target.value.toUpperCase(),
+        };
+      }
+      return item;
+    });
+    setGridInput(updatedItems);
+    // setActiveCell(item.id)
+  };
 
-  console.log("active", activeCell);
+  // const updateCell = (item) => {
+  //   setActiveCell(item.id);
+
+  // };
+
+  console.log("GridInpiut", gridInput);
+
+  // console.log("active", activeCell);
 
   return (
-    <form className="game-grid flex-wrap">
-      {gridInput.map((item) => {
-        return (
-          <input
-            key={item.id}
-            id={item.id}
-            type="text"
-            maxLength="1"
-            className="text-6xl uppercase text-center selected"
-            onChange={(e) => handleChange(e)}
-            onClick={() => handleClick(item)}
-            // style={{
-            //   backgroundColor: activeCell.includes(item.id)
-            //     ? "yellow"
-            //     : "white" && inactiveCells.includes(item.id)
-            //     ? "#A7D8FE"
-            //     : "white",
-            // }}
-            style={{
-              backgroundColor:
-                activeCell === item.id
-                  ? "yellow"
-                  : cellsToHighlight.includes(item.id)
-                  ? "#A7D8FE"
-                  : "white",
-            }}
-          />
-        );
-      })}
+    <form className="flex-wrap game-grid">
+      {gridInput &&
+        gridInput.map((item) => {
+          return (
+            <input
+              key={item.id}
+              id={item.id}
+              type="text"
+              maxLength="1"
+              placeholder={item.placeholder}
+              className="text-6xl text-center uppercase selected"
+              value={item.userInput}
+              name="userInput"
+              onChange={(event) => {
+                handleChange(item.id, event);
+              }}
+              onClick={() => handleClick(item)}
+              style={{
+                backgroundColor: item.isEditable
+                  ? activeCell === item.id
+                    ? "yellow"
+                    : cellsToHighlight.includes(item.id) && "#A7D8FE"
+                  : "black",
+              }}
+            />
+          );
+        })}
     </form>
   );
 };
@@ -79,3 +89,20 @@ export const GameGrid = (props) => {
         </div>
       ))} */
 }
+
+// backgroundColor: item.isEditable
+//                 ? "red"
+//                 : "black" && activeCell === item.id
+//                 ? "yellow"
+//                 : cellsToHighlight.includes(item.id)
+//                 ? "#A7D8FE"
+//                 : "white",
+
+// TASKS:
+// 1. take input and update state variable
+// 2. handle tab shifting for input while typing forward and backspace
+// 3. handle active cell color while typing or backspace
+// 4. integrate timer when game starts and end it
+// 5. check if answer input matches the correct answer
+// 6. alert when answer does not match
+// 7. put placeholders in grid, black spots in grid
