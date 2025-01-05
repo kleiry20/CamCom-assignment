@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { gridData } from "../data/gridData";
 
 export const GameGrid = (props) => {
@@ -6,12 +6,14 @@ export const GameGrid = (props) => {
 
   console.log("cellsToHighlight", cellsToHighlight);
 
-  const [activeCell, setActiveCell] = useState(cellsToHighlight[0]);
-  // const [activeRow, setActiveRow] = useState(cellsToHighlight);
+  const [activeCell, setActiveCell] = useState("");
 
-  const inactiveCells = [...cellsToHighlight];
-  inactiveCells.shift();
- 
+  useEffect(() => {
+    setActiveCell(cellsToHighlight[0]);
+  }, [cellsToHighlight]);
+
+  // const inactiveCells = [...cellsToHighlight];
+  // inactiveCells.shift();
 
   const [gridInput, setGridInput] = useState(gridData);
 
@@ -19,32 +21,43 @@ export const GameGrid = (props) => {
     setActiveCell(item.id);
   }
 
+  function handleChange(e) {
+    // setGridInput()
+  }
+
   console.log("active", activeCell);
 
   return (
-    <div className="game-grid flex-wrap">
+    <form className="game-grid flex-wrap">
       {gridInput.map((item) => {
         return (
           <input
             key={item.id}
+            id={item.id}
             type="text"
             maxLength="1"
-            className="text-6xl uppercase text-center"
-            // value={() => handleChange()}
-            // value={activeCell}
-
+            className="text-6xl uppercase text-center selected"
+            onChange={(e) => handleChange(e)}
             onClick={() => handleClick(item)}
+            // style={{
+            //   backgroundColor: activeCell.includes(item.id)
+            //     ? "yellow"
+            //     : "white" && inactiveCells.includes(item.id)
+            //     ? "#A7D8FE"
+            //     : "white",
+            // }}
             style={{
-              backgroundColor: activeCell.includes(item.id)
-                ? "yellow"
-                : "white" && inactiveCells.includes(item.id)
-                ? "#A7D8FE"
-                : "white",
+              backgroundColor:
+                activeCell === item.id
+                  ? "yellow"
+                  : cellsToHighlight.includes(item.id)
+                  ? "#A7D8FE"
+                  : "white",
             }}
           />
         );
       })}
-    </div>
+    </form>
   );
 };
 
