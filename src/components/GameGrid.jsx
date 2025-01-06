@@ -18,6 +18,7 @@ export const GameGrid = (props) => {
     setActiveCell(item.id);
   }
 
+  // updates the user input in state variable
   const handleChange = (id, event) => {
     const updatedItemList = gridInput.map((currentItem) => {
       if (currentItem.id === id) {
@@ -41,9 +42,7 @@ export const GameGrid = (props) => {
       return currentItem;
     });
 
-
-    // console.log(cellsToHighlight.indexOf(id), "id");
-    // tab switching
+    // tab switching logic
     var index_of_id = cellsToHighlight.indexOf(id);
     if (index_of_id != -1 && index_of_id != cellsToHighlight.length - 1) {
       setActiveCell(cellsToHighlight[index_of_id + 1]);
@@ -51,15 +50,8 @@ export const GameGrid = (props) => {
     }
 
     setGridInput(updatedItemList);
-    let res = checkFinalAnswer(updatedItemList);
-    setGameResult(res);
+    checkFinalAnswer(updatedItemList);
   };
-
-  // useEffect(() => {
-  //   // setTimeout(() => {
-  //   //   checkFinalAnswer(gridInput);
-  //   // }, 4000);
-  // }, [handleChange]);
 
   return (
     <form className="flex-wrap game-grid">
@@ -101,6 +93,7 @@ export const GameGrid = (props) => {
             </div>
           );
         })}
+      {/* {gameResult ? alert("Game solved!") : alert("Try again")} */}
     </form>
   );
 };

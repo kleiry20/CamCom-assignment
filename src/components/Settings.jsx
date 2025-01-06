@@ -6,7 +6,6 @@ export const Settings = ({ isOpen, onClose }) => {
 
   return (
     <div
-      //   onClick={onClose}
       style={{
         position: "fixed",
         top: 0,

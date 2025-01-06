@@ -15,16 +15,16 @@ export const Navbar = () => {
     setOpen(true);
   };
   return (
-    <div className="border p-4 flex justify-between">
+    <div className="flex justify-between p-4 border">
       <button onClick={handleOpen}>
-        <img className="h-8 w-8" src={SettingsIcon} alt="" />
+        <img className="w-8 h-8" src={SettingsIcon} alt="" />
       </button>
       <Settings isOpen={open} onClose={handleClose} />
 
-      <div className="flex gap-2 items-center">
+      <div className="flex items-center gap-2">
         <Stopwatch />
       </div>
-      <div className="flex gap-8 items-center">
+      <div className="flex items-center gap-8">
         <p>Rebus</p>
         <p>Clear</p>
         <p>Reveal</p>

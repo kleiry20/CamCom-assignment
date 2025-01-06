@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { GameContext } from "../context/GameContext";
-// import CloseIcon from "../assets/close.svg";
 
 export const GameResult = ({ isOpen, onClose }) => {
   const { gameResult, timeElapsed } = useContext(GameContext);
@@ -27,8 +26,6 @@ export const GameResult = ({ isOpen, onClose }) => {
           background: "white",
           height: "20rem",
           width: "50rem",
-          //   height: "auto",
-          //   width: "auto",
           margin: "auto",
           padding: "2rem 2.5rem",
           boxShadow: "2px solid black",
@@ -36,7 +33,7 @@ export const GameResult = ({ isOpen, onClose }) => {
       >
         <div className="flex justify-center pb-4">
           {gameResult ? (
-            <div className="flex flex-col gap-4 text-center ">
+            <div className="flex flex-col gap-4 mt-5 text-center">
               <p className="text-3xl font-extrabold">Congratulations!</p>
               <p className="text-3xl">
                 You solved <strong>The Mini</strong>
@@ -44,18 +41,22 @@ export const GameResult = ({ isOpen, onClose }) => {
               <p>
                 in <strong>{timeElapsed} seconds.</strong>
               </p>
-              <button className="w-2/3 px-3 py-2 text-sm text-white bg-black border rounded-full">
-                Share your results
-              </button>
+              <div className="w-full">
+                <button className="px-3 py-2 text-sm text-white bg-black border rounded-full ">
+                  Share your results
+                </button>
+              </div>
             </div>
           ) : (
-            <div className="flex flex-col gap-4">
-              <h2>Just about.</h2>
+            <div className="flex flex-col gap-4 mt-8 text-center">
+              <h2 className="text-3xl font-extrabold">Just about.</h2>
               <p>The puzzle is filled, but at least one</p>
               <p>square's amiss. Aw, shucks!</p>
-              <button className="text-white bg-black border rounded-full">
-                Keep trying
-              </button>
+              <div className="w-full">
+                <button className="px-3 py-2 text-sm text-white bg-black border rounded-full ">
+                  Keep trying
+                </button>
+              </div>
             </div>
           )}
         </div>

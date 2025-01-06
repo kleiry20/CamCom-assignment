@@ -6,7 +6,7 @@ import { gridData } from "../data/gridData";
 export const GameProvider = ({ children }) => {
   const [currentQuestion, setCurrentQuestion] = useState(questionData[0]);
   const [gridInput, setGridInput] = useState(gridData);
-  const [gameResult, setGameResult] = useState();
+  const [gameResult, setGameResult] = useState(true);
   const [timeElapsed, setTimeElapsed] = useState();
 
   // to update answer for a cell
@@ -28,14 +28,18 @@ export const GameProvider = ({ children }) => {
     setCurrentQuestion(question);
   };
 
+  // to check the final answer of grid
   const checkFinalAnswer = (gridInput) => {
     for (let i = 0; i < gridInput.length; i++) {
       if (gridInput[i].isCorrect === true) {
+        setGameResult(true);
         continue;
       } else {
+        setGameResult(false);
         return false;
       }
     }
+    setGameResult(true);
     return true;
   };
 

@@ -1,5 +1,3 @@
-// count variable to count the number of correct cells filled in - black cells
-
 export const questionData = [
   {
     id: 1,
