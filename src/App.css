@@ -73,7 +73,6 @@ body {
 .cell-placeholder {
   min-width: 30%;
   display: block;
-  position: relative;
   padding: 3px 0 0 5px;
   font-size: 30px;
 }

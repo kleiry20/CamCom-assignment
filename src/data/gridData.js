@@ -36,12 +36,12 @@ export const gridData = [
     userInput: "",
     answer: null,
     isEditable: false,
-    isCorrect: null,
+    isCorrect: true,
   },
   {
     id: "B1",
     userInput: "",
-    answer: "G",
+    answer: "I",
     isEditable: true,
     isCorrect: null,
     placeholder: 5,
@@ -152,7 +152,7 @@ export const gridData = [
     userInput: "",
     answer: null,
     isEditable: false,
-    isCorrect: null,
+    isCorrect: true,
     placeholder: "",
   },
   {

@@ -2,48 +2,37 @@ import React, { useState, useContext } from "react";
 import { GameGrid } from "./GameGrid";
 import { questionData } from "../data/questionData";
 import { GameContext } from "../context/GameContext";
+import { GameResult } from "./GameResult";
 export const GameView = () => {
-  const { currentQuestion, updateCurrentQuestion } = useContext(GameContext);
-
-  const [selectedAcrossIndex, setSelectedAcrossIndex] = useState(null);
-  const [selectedDownIndex, setSelectedDownIndex] = useState(null);
-  // const [activeCell, setActiveCell] = useState();
+  const { currentQuestion, updateCurrentQuestion, gameResult } =
+    useContext(GameContext);
 
   const [selectedQuestion, setSelectedQuestion] = useState(questionData[0]);
+  const [open, setOpen] = useState(false);
 
-  // const handleAcrossClick = (index) => {
-  //   setSelectedAcrossIndex(index);
-  //   setSelectedDownIndex(null);
-  // };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
-  // const handleDownClick = (index) => {
-  //   setSelectedDownIndex(index);
-  //   setSelectedAcrossIndex(null);
-  // };
-
-  // const handleHintDisplay = (item) => {
-  //   setSelectedQuestion(item);
-  //   // setActiveCell(item.cells[0]);
-  // };
-
-  // useEffect(() => {
-  //   setActiveCell(cellsToHighlight[0]);
-  // }, [cellsToHighlight]);
-
+  const handleOpen = () => {
+    setOpen(true);
+  };
   return (
     <article className="flex gap-4">
+      <>
+        <button onClick={handleOpen}>result</button>
+        <GameResult isOpen={open} onClose={handleClose} />
+      </>
+
       <section className="flex flex-col items-end w-1/2 gap-2 p-4">
         <div
           className="p-4"
           style={{ backgroundColor: "#DCEFFF", width: "30.25rem" }}
         >
           <p className="font-semibold">
-            {/* {selectedQuestion?.quesNumber +
-              (selectedQuestion?.direction === "across" ? "A" : "D")} */}
             {currentQuestion?.quesNumber +
               (currentQuestion?.direction === "across" ? "A" : "D")}
             <span className="ml-2 font-normal">
-              {/* {selectedQuestion?.quesText} */}
               {currentQuestion?.quesText}
             </span>
           </p>
@@ -66,16 +55,11 @@ export const GameView = () => {
                       <li
                         key={item.id}
                         onClick={() => {
-                          // handleAcrossClick(item.id);
-                          // handleHintDisplay(item);
                           updateCurrentQuestion(item);
                         }}
                         className="hint-li"
                         style={{
                           backgroundColor:
-                            // selectedAcrossIndex === item.id
-                            //   ? "#A7D8FE"
-                            //   : "white",
                             currentQuestion.id === item.id
                               ? "#A7D8FE"
                               : "white",
@@ -102,8 +86,6 @@ export const GameView = () => {
                       <li
                         key={item.id}
                         onClick={() => {
-                          // handleDownClick(item.id);
-                          // handleHintDisplay(item);
                           updateCurrentQuestion(item);
                         }}
                         className="hint-li"

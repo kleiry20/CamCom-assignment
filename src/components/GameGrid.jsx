@@ -4,8 +4,8 @@ import { GameContext } from "../context/GameContext";
 
 export const GameGrid = (props) => {
   const { cellsToHighlight, setSelectedQuestion } = props;
-  const { checkFinalAnswer } = useContext(GameContext);
-  const [count, setCount] = useState();
+  const { checkFinalAnswer, gameResult, setGameResult } =
+    useContext(GameContext);
 
   const [gridInput, setGridInput] = useState(gridData);
   const [activeCell, setActiveCell] = useState("");
@@ -23,16 +23,13 @@ export const GameGrid = (props) => {
       if (currentItem.id === id) {
         const updatedValue = event.target.value.toUpperCase();
 
-        // Perform checks directly here
         if (updatedValue === currentItem.answer) {
-          // console.log("match! val, ans", updatedValue, currentItem.answer);
           return {
             ...currentItem,
             [event.target.name]: updatedValue,
             isCorrect: true,
           };
         } else {
-          // console.log("NOO", updatedValue, currentItem.answer);
           return {
             ...currentItem,
             [event.target.name]: updatedValue,
@@ -40,10 +37,22 @@ export const GameGrid = (props) => {
           };
         }
       }
+
       return currentItem;
     });
-    // console.log("updatedItemList", updatedItemList);
+
+
+    // console.log(cellsToHighlight.indexOf(id), "id");
+    // tab switching
+    var index_of_id = cellsToHighlight.indexOf(id);
+    if (index_of_id != -1 && index_of_id != cellsToHighlight.length - 1) {
+      setActiveCell(cellsToHighlight[index_of_id + 1]);
+      document.getElementById(cellsToHighlight[index_of_id + 1]).focus();
+    }
+
     setGridInput(updatedItemList);
+    let res = checkFinalAnswer(updatedItemList);
+    setGameResult(res);
   };
 
   // useEffect(() => {
@@ -78,7 +87,6 @@ export const GameGrid = (props) => {
                 name="userInput"
                 onChange={(event) => {
                   handleChange(item.id, event);
-                  checkFinalAnswer(gridInput);
                 }}
                 onClick={() => handleClick(item)}
                 style={{
