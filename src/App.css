@@ -49,19 +49,37 @@ body {
 .game-grid {
   border: 2px solid black;
   display: flex;
-  flex-grow: 1;
-  /* width: 25rem;
-  height: 25rem; */
-  /* width: 25.25rem;
-  height: 25.25rem; */
   width: 30.25rem;
   height: 30.25rem;
 }
 
-.game-grid input {
+/* .game-grid input {
   border: 1px solid black;
-  /* width: 5rem;
-  height: 5rem; */
   width: 6rem;
   height: 6rem;
+} */
+
+.game-grid input:focus-visible {
+  outline: none;
+}
+
+.cell {
+  border: 1px solid black;
+  width: 6rem;
+  height: 6rem;
+  display: flex;
+}
+
+.cell-placeholder {
+  min-width: 30%;
+  display: block;
+  position: relative;
+  padding: 3px 0 0 5px;
+  font-size: 30px;
+}
+
+.cell-input {
+  max-width: 70%;
+  text-align: left;
+  padding-top: 18px;
 }

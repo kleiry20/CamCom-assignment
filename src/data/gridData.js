@@ -14,6 +14,7 @@ export const gridData = [
     answer: "U",
     isEditable: true,
     isCorrect: null,
+    placeholder: 2,
   },
   {
     id: "A3",
@@ -21,6 +22,7 @@ export const gridData = [
     answer: "S",
     isEditable: true,
     isCorrect: null,
+    placeholder: 3,
   },
   {
     id: "A4",
@@ -28,6 +30,7 @@ export const gridData = [
     answer: "T",
     isEditable: true,
     isCorrect: null,
+    placeholder: 4,
   },
   {
     id: "A5",
@@ -42,6 +45,7 @@ export const gridData = [
     answer: "G",
     isEditable: true,
     isCorrect: null,
+    placeholder: 5,
   },
   {
     id: "B2",
@@ -70,6 +74,7 @@ export const gridData = [
     answer: "C",
     isEditable: true,
     isCorrect: null,
+    placeholder: 6,
   },
   {
     id: "C1",
@@ -77,6 +82,7 @@ export const gridData = [
     answer: "R",
     isEditable: true,
     isCorrect: null,
+    placeholder: 7,
   },
   {
     id: "C2",
@@ -112,6 +118,7 @@ export const gridData = [
     answer: "L",
     isEditable: true,
     isCorrect: null,
+    placeholder: 8,
   },
   {
     id: "D2",
@@ -147,6 +154,7 @@ export const gridData = [
     answer: null,
     isEditable: false,
     isCorrect: null,
+    placeholder: "",
   },
   {
     id: "E2",
@@ -154,6 +162,7 @@ export const gridData = [
     answer: "L",
     isEditable: true,
     isCorrect: null,
+    placeholder: 9,
   },
   {
     id: "E3",

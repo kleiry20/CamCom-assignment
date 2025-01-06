@@ -2,14 +2,14 @@ import { useState } from "react";
 import "./App.css";
 import { GameView } from "./components/GameView";
 import { Navbar } from "./components/Navbar";
+import { GameProvider } from "./context/GameProvider";
 
 function App() {
-  const [currentQuestion, setCurrentQuestion] = useState();
   return (
-    <>
+    <GameProvider>
       <Navbar />
       <GameView />
-    </>
+    </GameProvider>
   );
 }
 
