@@ -29,15 +29,20 @@ export const GameProvider = ({ children }) => {
 
   const highlightGridRow = () => {};
 
-  const checkWord = () => {};
+  const checkFinalAnswer = (gridInput) => {
+    gridInput.map((item) => {
+      if (item.isCorrect === true) {
+        setCount(count + 1);
+      } else {
+        // setCount(count - 1);
+      }
+      return count;
+    });
 
-  const checkAnswer = (id) => {
-    console.log("id", id);
-    const currentItem = gridInput.find((item) => item.id === id);
-    console.log("currentItem", currentItem);
-    if (currentItem.userInput === currentItem.answer) {
-      setCount(count + 1);
-      console.log("updated count", currentItem.userInput, currentItem.answer);
+    if (count == 23) {
+      console.log("You WONNNNNN!", count);
+    } else {
+      console.log("You LOSEEE!", count);
     }
   };
 
@@ -47,7 +52,7 @@ export const GameProvider = ({ children }) => {
         currentQuestion,
         gridInput,
         updateCell,
-        checkAnswer,
+        checkFinalAnswer,
         updateCurrentQuestion,
       }}
     >

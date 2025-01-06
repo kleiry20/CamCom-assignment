@@ -4,7 +4,8 @@ import { GameContext } from "../context/GameContext";
 
 export const GameGrid = (props) => {
   const { cellsToHighlight, setSelectedQuestion } = props;
-  const { updateCell } = useContext(GameContext);
+  const { checkFinalAnswer } = useContext(GameContext);
+  const [count, setCount] = useState();
 
   const [gridInput, setGridInput] = useState(gridData);
   const [activeCell, setActiveCell] = useState("");
@@ -14,42 +15,41 @@ export const GameGrid = (props) => {
   }, [cellsToHighlight]);
 
   function handleClick(item) {
-    // console.log(item.id);
     setActiveCell(item.id);
   }
 
   const handleChange = (id, event) => {
-    const updatedItems = gridInput.map((item) => {
-      if (item.id === id) {
-        return {
-          ...item,
-          [event.target.name]: event.target.value.toUpperCase(),
-        };
-      }
-      if (event.target.value.toUpperCase() === item.answer) {
-        setCount(count + 1);
+    const updatedItemList = gridInput.map((currentItem) => {
+      if (currentItem.id === id) {
+        const updatedValue = event.target.value.toUpperCase();
 
-        console.log("updated count", currentItem.userInput, currentItem.answer);
+        // Perform checks directly here
+        if (updatedValue === currentItem.answer) {
+          // console.log("match! val, ans", updatedValue, currentItem.answer);
+          return {
+            ...currentItem,
+            [event.target.name]: updatedValue,
+            isCorrect: true,
+          };
+        } else {
+          // console.log("NOO", updatedValue, currentItem.answer);
+          return {
+            ...currentItem,
+            [event.target.name]: updatedValue,
+            isCorrect: false,
+          };
+        }
       }
-      return item;
+      return currentItem;
     });
-    setGridInput(updatedItems);
-  };
-
-  const checkAnswer = (id) => {
-    console.log("id", id);
-    const currentItem = gridInput.find((item) => item.id === id);
-    console.log("currentItem", currentItem);
-    if (currentItem.userInput === currentItem.answer) {
-      setCount(count + 1);
-      console.log("updated count", currentItem.userInput, currentItem.answer);
-    }
+    // console.log("updatedItemList", updatedItemList);
+    setGridInput(updatedItemList);
   };
 
   // useEffect(() => {
-  //   setTimeout(() => {
-  //     checkAnswer(id);
-  //   }, 4000);
+  //   // setTimeout(() => {
+  //   //   checkFinalAnswer(gridInput);
+  //   // }, 4000);
   // }, [handleChange]);
 
   return (
@@ -70,7 +70,6 @@ export const GameGrid = (props) => {
             >
               <span className="cell-placeholder">{item.placeholder}</span>
               <input
-                // key={item.id}
                 id={item.id}
                 type="text"
                 maxLength="1"
@@ -79,12 +78,8 @@ export const GameGrid = (props) => {
                 name="userInput"
                 onChange={(event) => {
                   handleChange(item.id, event);
-                  // checkAnswer(item.id);
+                  checkFinalAnswer(gridInput);
                 }}
-                // onChange={(event) => {
-                //   updateCell(item.id, event);
-                //   checkAnswer(item.id);
-                // }}
                 onClick={() => handleClick(item)}
                 style={{
                   caretColor: "transparent",

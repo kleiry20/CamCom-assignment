@@ -6,7 +6,6 @@ export const gridData = [
     isEditable: true,
     isCorrect: null,
     placeholder: 1,
-    // questions: [1, 2],
   },
   {
     id: "A2",
