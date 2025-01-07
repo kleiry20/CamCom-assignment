@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { GameContext } from "./GameContext";
 import { questionData } from "../data/questionData";
 import { gridData } from "../data/gridData";
-
 export const GameProvider = ({ children }) => {
   const [currentQuestion, setCurrentQuestion] = useState(questionData[0]);
   const [gridInput, setGridInput] = useState(gridData);
-  const [gameResult, setGameResult] = useState(true);
+  const [gameResult, setGameResult] = useState(false);
   const [timeElapsed, setTimeElapsed] = useState();
 
   // to update answer for a cell
@@ -32,7 +31,6 @@ export const GameProvider = ({ children }) => {
   const checkFinalAnswer = (gridInput) => {
     for (let i = 0; i < gridInput.length; i++) {
       if (gridInput[i].isCorrect === true) {
-        setGameResult(true);
         continue;
       } else {
         setGameResult(false);

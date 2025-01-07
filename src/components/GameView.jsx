@@ -4,17 +4,14 @@ import { questionData } from "../data/questionData";
 import { GameContext } from "../context/GameContext";
 import { GameResult } from "./GameResult";
 export const GameView = () => {
-  const { currentQuestion, updateCurrentQuestion, gameResult } =
+  const { currentQuestion, updateCurrentQuestion, gameResult, setGameResult } =
     useContext(GameContext);
   console.log("gameree", gameResult);
-
   const [selectedQuestion, setSelectedQuestion] = useState(questionData[0]);
   const [open, setOpen] = useState(false);
-
   const handleClose = () => {
-    setOpen(false);
+    setGameResult(false);
   };
-
   const handleOpen = () => {
     setOpen(true);
   };
@@ -29,11 +26,13 @@ export const GameView = () => {
             <p className="font-semibold">
               {currentQuestion?.quesNumber +
                 (currentQuestion?.direction === "across" ? "A" : "D")}
+
               <span className="ml-2 font-normal">
                 {currentQuestion?.quesText}
               </span>
             </p>
           </div>
+
           <GameGrid
             cellsToHighlight={currentQuestion?.cells}
             setSelectedQuestion={setSelectedQuestion}
@@ -44,6 +43,7 @@ export const GameView = () => {
             {/* Across List */}
             <div className="w-2/5">
               <h3 className="pb-1 font-bold uppercase border-b">Across</h3>
+
               <ul>
                 {questionData.map((item, index) => {
                   return (
@@ -73,7 +73,6 @@ export const GameView = () => {
                 })}
               </ul>
             </div>
-
             {/* Down List */}
             <div className="w-2/5">
               <h3 className="pb-1 font-bold uppercase border-b">Down</h3>
@@ -110,24 +109,21 @@ export const GameView = () => {
         </section>
       </article>
 
-      
-
       <div className="p-4 text-right">
         <button
           id="game-result-btn"
-          className="px-3 py-2 border rounded-md"
-          // style={{ display: "none" }}
+          className="px-3 py-2 border rounded-md" // style={{ display: "none" }}
           onClick={handleOpen}
         >
           Check result
         </button>
-        <GameResult isOpen={open} onClose={handleClose} />
+        <GameResult isOpen={gameResult} onClose={handleClose} />
       </div>
 
       {/* {gameResult &&
-        document
-          .getElementById("game-result-btn")
-          .addEventListener("click", () => handleOpen())} */}
+        document
+          .getElementById("game-result-btn")
+          .addEventListener("click", () => handleOpen())} */}
     </>
   );
 };

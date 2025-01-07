@@ -1,12 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import { gridData } from "../data/gridData";
 import { GameContext } from "../context/GameContext";
-
 export const GameGrid = (props) => {
   const { cellsToHighlight, setSelectedQuestion } = props;
   const { checkFinalAnswer, gameResult, setGameResult } =
     useContext(GameContext);
-
   const [gridInput, setGridInput] = useState(gridData);
   const [activeCell, setActiveCell] = useState("");
 
@@ -23,7 +21,6 @@ export const GameGrid = (props) => {
     const updatedItemList = gridInput.map((currentItem) => {
       if (currentItem.id === id) {
         const updatedValue = event.target.value.toUpperCase();
-
         if (updatedValue === currentItem.answer) {
           return {
             ...currentItem,
@@ -38,7 +35,6 @@ export const GameGrid = (props) => {
           };
         }
       }
-
       return currentItem;
     });
 
@@ -48,9 +44,8 @@ export const GameGrid = (props) => {
       setActiveCell(cellsToHighlight[index_of_id + 1]);
       document.getElementById(cellsToHighlight[index_of_id + 1]).focus();
     }
-
     setGridInput(updatedItemList);
-    checkFinalAnswer(updatedItemList);
+    setGameResult(checkFinalAnswer(updatedItemList));
   };
 
   return (
@@ -93,7 +88,6 @@ export const GameGrid = (props) => {
             </div>
           );
         })}
-      {/* {gameResult ? alert("Game solved!") : alert("Try again")} */}
     </form>
   );
 };
